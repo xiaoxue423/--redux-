@@ -1,48 +1,45 @@
 import React, { Component } from "react";
-import store from '../../redux/store'
+import store from "../../redux/store";
 
 export default class Count extends Component {
-  state = { carName: '奔驰' };
+  state = { carName: "奔驰" };
 
-  componentDidMount(){
-    store.subscribe(()=>{
-      this.setState({})
-    })
+  componentDidMount() {
+    store.subscribe(() => {
+      this.setState({});
+    });
   }
 
   // 加
   increment = () => {
     const { value } = this.selectNumber;
 
-    store.dispatch({type:'increment',data:value*1})
+    store.dispatch({ type: "increment", data: value * 1 });
   };
 
   // 减
   decrement = () => {
-    const { count } = this.state;
     const { value } = this.selectNumber;
-
-    this.setState({ count: count - value * 1 });
+    store.dispatch({ type: "decrement", data: value * 1 });
   };
 
   // 奇数再加
   incrementIfOdd = () => {
-    const { count } = this.state;
+    const count = store.getState();
     const { value } = this.selectNumber;
 
     if (count % 2 !== 0) {
-      this.setState({ count: count + value * 1 });
+      store.dispatch({ type: "increment", data: value * 1 });
     }
   };
 
   // 异步加
   incrementAsync = () => {
-    const { count } = this.state;
     const { value } = this.selectNumber;
 
     setTimeout(() => {
-      this.setState({ count: count + value * 1 });
-    },2000);
+      store.dispatch({ type: "increment", data: value * 1 });
+    }, 2000);
   };
 
   render() {
