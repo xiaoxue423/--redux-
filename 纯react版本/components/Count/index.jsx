@@ -1,20 +1,14 @@
 import React, { Component } from "react";
-import store from '../../redux/store'
 
 export default class Count extends Component {
-  state = { carName: '奔驰' };
-
-  componentDidMount(){
-    store.subscribe(()=>{
-      this.setState({})
-    })
-  }
+  state = { count: 0 };
 
   // 加
   increment = () => {
+    const { count } = this.state;
     const { value } = this.selectNumber;
 
-    store.dispatch({type:'increment',data:value*1})
+    this.setState({ count: count + value * 1 });
   };
 
   // 减
@@ -46,9 +40,10 @@ export default class Count extends Component {
   };
 
   render() {
+    const { count } = this.state;
     return (
       <div>
-        <h1>和为：{store.getState()}</h1>
+        <h1>和为：{count}</h1>
         <select ref={(c) => (this.selectNumber = c)}>
           <option value="1">1</option>
           <option value="2">2</option>
