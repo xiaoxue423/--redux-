@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import store from "../../redux/store";
-import {createIncrementAction,createDecrementAction} from '../../redux/count_action.js'
 
 export default class Count extends Component {
   state = { carName: "奔驰" };
@@ -15,13 +14,13 @@ export default class Count extends Component {
   increment = () => {
     const { value } = this.selectNumber;
 
-    store.dispatch(createIncrementAction(value * 1));
+    store.dispatch({ type: "increment", data: value * 1 });
   };
 
   // 减
   decrement = () => {
     const { value } = this.selectNumber;
-    store.dispatch(createDecrementAction(value * 1));
+    store.dispatch({ type: "decrement", data: value * 1 });
   };
 
   // 奇数再加
