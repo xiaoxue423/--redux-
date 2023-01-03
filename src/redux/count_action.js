@@ -1,6 +1,7 @@
+import {INCREMENT,DECREMENT} from './constant'
 
 export function createIncrementAction(data){
-  return {type:'increment',data}
+  return {type:INCREMENT,data}
 }
 
-export const createDecrementAction = data => ({type:'increment',data})
+export const createDecrementAction = data => ({type:DECREMENT,data})
