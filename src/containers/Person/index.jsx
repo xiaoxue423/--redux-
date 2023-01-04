@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import { nanoid } from "nanoid";
+
 
 export default class Person extends Component {
   addPerson = ()=>{
     const name = this.name.value
     const age = this.age.value
-    console.log('name：',name,'，age：',age)
+    const personObj = {id:nanoid(),name,age}
+    console.log('personObj',personObj)
   }
   render() {
     return (
@@ -18,6 +21,9 @@ export default class Person extends Component {
         <input ref={(c) => (this.age = c)} type="text" placeholder="输入年龄" />
         <button onClick={this.addPerson}>添加</button>
         <ul>
+          {
+
+          }
           <li>名字1-年龄</li>
           <li>名字2-年龄</li>
           <li>名字3-年龄</li>
