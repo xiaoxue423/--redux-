@@ -1,15 +1,7 @@
-import {legacy_createStore as createStore,applyMiddleware,combineReducers} from 'redux'
-
-// 引入为Count组件服务的reducer
-import countReducer from './reducers/count'
-import personReducer from './reducers/person'
+import {legacy_createStore as createStore,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
+import reducer from './reducers/index'
 
-const allReducers = combineReducers({
-  count:countReducer,
-  persons:personReducer
-})
-
-export default createStore(allReducers,composeWithDevTools(applyMiddleware(thunk)))
+export default createStore(reducer,composeWithDevTools(applyMiddleware(thunk)))
 

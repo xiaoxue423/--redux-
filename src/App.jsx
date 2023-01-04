@@ -6,7 +6,6 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        App胡雪测试
         <Count/>
         <hr />
         <Person/>

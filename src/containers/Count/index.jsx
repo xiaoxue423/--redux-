@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  createIncrementAction,
-  createDecrementAction,
-  createIncrementAsyncAction,
+  increment,
+  decrement,
+  incrementAsync,
 } from "../../redux/actions/count";
 
 // UI组件
@@ -13,27 +13,27 @@ class Count extends Component {
   // 加
   increment = () => {
     const { value } = this.selectNumber;
-    this.props.jia(value * 1);
+    this.props.increment(value * 1);
   };
 
   // 减
   decrement = () => {
     const { value } = this.selectNumber;
-    this.props.jian(value * 1);
+    this.props.decrement(value * 1);
   };
 
   // 奇数再加
   incrementIfOdd = () => {
     const { value } = this.selectNumber;
     if (this.props.count % 2 !== 0) {
-      this.props.jia(value * 1);
+      this.props.increment(value * 1);
     }
   };
 
   // 异步加
   incrementAsync = () => {
     const { value } = this.selectNumber;
-    this.props.jiaAsync(value * 1, 2000);
+    this.props.incrementAsync(value * 1, 2000);
   };
 
   render() {
@@ -61,26 +61,10 @@ class Count extends Component {
 //暴露容器组件
 const CountContainer = connect(
   (state) => ({ count: state.count, personCount: state.persons.length }), //映射状态
-  // (dispatch) => {
-  //   return {
-  //     jia: (data) => {
-  //       // 通知redux执行加法
-  //       dispatch(createIncrementAction(data));
-  //     },
-  //     jian: (data) => {
-  //       // 通知redux执行减法
-  //       dispatch(createDecrementAction(data));
-  //     },
-  //     jiaAsync: (data, time) => {
-  //       // 通知redux执行异步加法
-  //       dispatch(createIncrementAsyncAction(data, time));
-  //     },
-  //   };
-  // }
   {
-    jia: createIncrementAction,
-    jian: createDecrementAction,
-    jiaAsync: createIncrementAsyncAction,
+    increment,
+    decrement,
+    incrementAsync,
   } //映射操作状态的方法
 )(Count);
 
