@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import { nanoid } from "nanoid";
+import {connect} from 'react-redux'
+import {createAddPersonAction} from '../../redux/actions/person'
 
 
-export default class Person extends Component {
+class Person extends Component {
   addPerson = ()=>{
     const name = this.name.value
     const age = this.age.value
     const personObj = {id:nanoid(),name,age}
-    console.log('personObj',personObj)
+
+    this.props.addPerson(personObj)
+    this.name.value = ""
+    this.age.value = ""
   }
   render() {
     return (
       <div>
         <h1>我是Person组件...</h1>
+        <h1>Count组件的和为:{this.props.count}</h1>
         <input
           ref={(c) => (this.name = c)}
           type="text"
@@ -22,13 +28,21 @@ export default class Person extends Component {
         <button onClick={this.addPerson}>添加</button>
         <ul>
           {
-
+            this.props.persons.map((personObj)=>{
+              return (
+                <li key={personObj.id}>id：{personObj.id}-名字：{personObj.name}-年龄：{personObj.age}</li>
+              )
+            })
           }
-          <li>名字1-年龄</li>
-          <li>名字2-年龄</li>
-          <li>名字3-年龄</li>
         </ul>
       </div>
     );
   }
 }
+
+export default connect(
+  state=>({persons:state.persons,count:state.count}),//映射状态
+  {
+    addPerson:createAddPersonAction//映射操作状态的方法
+  }
+)(Person)

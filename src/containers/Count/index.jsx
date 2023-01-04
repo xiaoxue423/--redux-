@@ -33,7 +33,7 @@ class Count extends Component {
   // 异步加
   incrementAsync = () => {
     const { value } = this.selectNumber;
-    this.props.jiaAsync(value*1,2000)
+    this.props.jiaAsync(value * 1, 2000);
   };
 
   render() {
@@ -42,6 +42,7 @@ class Count extends Component {
         <h1>我是count组件</h1>
         <h1>我的车是：{this.state.carName}</h1>
         <h1>和为：{this.props.count}</h1>
+        <h1>Person组件的人数为:{this.props.personCount}</h1>
         <select ref={(c) => (this.selectNumber = c)}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -59,7 +60,7 @@ class Count extends Component {
 
 //暴露容器组件
 const CountContainer = connect(
-  (state) => ({ count: state }), //映射状态
+  (state) => ({ count: state.count, personCount: state.persons.length }), //映射状态
   // (dispatch) => {
   //   return {
   //     jia: (data) => {
@@ -77,10 +78,10 @@ const CountContainer = connect(
   //   };
   // }
   {
-      jia: createIncrementAction,
-      jian: createDecrementAction,
-      jiaAsync: createIncrementAsyncAction,
+    jia: createIncrementAction,
+    jian: createDecrementAction,
+    jiaAsync: createIncrementAsyncAction,
   } //映射操作状态的方法
-  )(Count);
+)(Count);
 
 export default CountContainer;
