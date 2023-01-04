@@ -4,7 +4,7 @@ import {
   createIncrementAction,
   createDecrementAction,
   createIncrementAsyncAction,
-} from "../../redux/count_action";
+} from "../../redux/actions/count";
 
 // UI组件
 class Count extends Component {
@@ -39,6 +39,7 @@ class Count extends Component {
   render() {
     return (
       <div>
+        <h1>我是count组件</h1>
         <h1>我的车是：{this.state.carName}</h1>
         <h1>和为：{this.props.count}</h1>
         <select ref={(c) => (this.selectNumber = c)}>
