@@ -2,11 +2,11 @@ import CountUI from "../../components/Count/index";
 import { connect } from "react-redux";
 import {createIncrementAction,createDecrementAction,createIncrementAsyncAction} from '../../redux/count_action'
 
-function a(state) {
+function mapStateToProps(state) {
   return { count: state };
 }
 
-function b(dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     jia: (data) => {
       // 通知redux执行加法
@@ -23,6 +23,6 @@ function b(dispatch) {
   };
 }
 
-const CountContainer = connect(a, b)(CountUI);
+const CountContainer = connect(mapStateToProps, mapDispatchToProps)(CountUI);
 
 export default CountContainer;
